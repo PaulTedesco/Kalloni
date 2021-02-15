@@ -27,7 +27,7 @@ class Users extends DataBase
     {
         $login = $this->DB->prepare("SELECT * FROM `users` WHERE email = ?");
         $login->execute(array($email));
-        $users = $login->fetchAll(PDO::FETCH_CLASS, get_class($this->SCHEMA))[0];
+        $users = $login->fetchObject(get_class($this->SCHEMA));
         if (is_null($users) || empty($users)) return new ErrorException("Invalid Users: email");
         if (!password_verify($password, $users->getPassword())) return new ErrorException("Invalid Users: password");
         return $users;

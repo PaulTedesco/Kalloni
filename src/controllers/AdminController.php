@@ -11,24 +11,37 @@ use App\Utils\FunctionClass;
 class AdminController extends Common
 {
 
+    private array $params;
+
     public function __construct()
     {
         parent::__construct("Dashboard");
+        $this->params = array('sidebar' => true);
+
     }
 
     public function showDashboard()
     {
         $users = new Users();
-        $params = array('sidebar' => true, "userCount" => $users->getCount($users->SCHEMA));
-        parent::getView('Admin/dashboard.twig', $params);
+        $param = array("users" => $users->getCount($users->SCHEMA));
+        $this->params = array_merge($this->params, $param);
+        parent::getView('Admin/dashboard.twig', $this->params);
     }
 
     public function showUser()
     {
         $users = new Users();
+        $param = array("users" => $users->getAll($users->SCHEMA));
+        $this->params = array_merge($this->params, $param);
+        parent::getView('Admin/users.twig', $this->params);
+    }
 
-        $params = array('sidebar' => true, "users" => $users->getAll($users->SCHEMA));
-        parent::getView('Admin/users.twig', $params);
+    public function showItemsCategories()
+    {
+        $items_cat = new \App\Models\ItemsCategories();
+        $param = array("categories" => $items_cat->getAll($items_cat->SCHEMA));
+        $this->params = array_merge($this->params, $param);
+        parent::getView('Admin/items_categories.twig', $this->params);
     }
 
     public function updateUser(string $uuid, string $role)
