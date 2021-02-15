@@ -1,4 +1,21 @@
 {% extends "Layout/layout.twig" %}
 {% block content %}
-    <h1>Toto</h1>
+    <div class="card-deck">
+        {% for item in items %}
+            <div class="card col-2">
+                <!-- Card image -->
+                <img class="card-img-top" src="{{ assets }}{{ item.getPicture }}" alt="{{ item.getTitle }}">
+                <!-- List group -->
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{ item.getTitle }}</li>
+                    <li class="list-group-item">{{ item.getDescription }}</li>
+                    <li class="list-group-item">{{ item.price }} €</li>
+                </ul>
+                <!-- Card body -->
+                <div class="card-body">
+                    <a href="/items/{{ item.getTitle()|replace({" ":"_"}) }}" class="btn btn-primary">See</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

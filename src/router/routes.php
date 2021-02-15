@@ -9,6 +9,7 @@ use App\Controllers\AdminController;
 use App\Controllers\HomeController;
 use App\Controllers\Items;
 use App\Controllers\ItemsCategories;
+use App\Controllers\Shop;
 use App\Controllers\UserController;
 use App\Utils\FunctionClass;
 
@@ -32,10 +33,12 @@ class Routes
         $UserController = new UserController();
         $AdminController = new AdminController();
         $ItemsCatController = new ItemsCategories();
-        $ItemsController = new Items();
+        $ItemsAdminController = new Items();
+        $shopController = new Shop();
 
         $this->router->map('GET', '/home', function () use ($HomeController) { return $HomeController->show(); });
         $this->router->map('GET', '/profile/[*:uuid]', function ($uuid) use ($UserController) { return $UserController->show($uuid); });
+        $this->router->map('GET', '/items/[*:uuid]', function($uuid) use ($shopController) {return $shopController->show($uuid);});
 
         if (!FunctionClass::isConnected()):
             $this->router->map('POST', '/register', function () use ($UserController) { return $UserController->register($_POST); });
@@ -67,9 +70,9 @@ class Routes
                     /** End Categories */
                     /** Categories Section */
             $this->router->map('GET', '/admin/items', function () use ($AdminController) { return $AdminController->showItems(); });
-            $this->router->map('POST', '/admin/items/create', function () use ($ItemsController) { return $ItemsController->createItems($_POST); });
-            $this->router->map('GET', '/admin/items/delete/[*:uuid]', function (string $uuid) use ($ItemsController) { return $ItemsController->deleteItem($uuid); });
-            $this->router->map('POST', '/admin/items/update/[*:uuid]', function (string $uuid) use ($ItemsController) { return $ItemsController->updateItem($uuid, $_POST); });
+            $this->router->map('POST', '/admin/items/create', function () use ($ItemsAdminController) { return $ItemsAdminController->createItems($_POST); });
+            $this->router->map('GET', '/admin/items/delete/[*:uuid]', function (string $uuid) use ($ItemsAdminController) { return $ItemsAdminController->deleteItem($uuid); });
+            $this->router->map('POST', '/admin/items/update/[*:uuid]', function (string $uuid) use ($ItemsAdminController) { return $ItemsAdminController->updateItem($uuid, $_POST); });
                     /** End Categories */
             $this->router->map('GET', '/admin/items', function () use ($UserController) { return $UserController->showRegister(); });
             $this->router->map('GET', '/admin/facture', function () use ($UserController) { return $UserController->showRegister(); });

@@ -1,0 +1,18 @@
+{% extends "Layout/layout.twig" %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3">
+                <img src="{{ assets }}{{ item.getPicture }}" alt="">
+            </div>
+            <div class="col">
+                <h2>{{ item.getTitle }}
+                    <small><br><b>{{ item.getPrice }} €</b></small></h2>
+                <p>{{ item.getDescription }}</p>
+                <div class="action">
+                    <a class="btn btn-lg btn-primary" role="button">Add to card</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

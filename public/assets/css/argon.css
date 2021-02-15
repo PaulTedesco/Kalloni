@@ -224,7 +224,7 @@ a:hover
 {
     text-decoration: none; 
 
-    color: #233dd2;
+    color: #86dee8;
 }
 
 a:not([href])
@@ -3378,7 +3378,7 @@ fieldset:disabled a.btn
 {
     color: #fff;
     border-color: #1d1d1b;
-    background-color: #324cdd;
+    background-color: #86dee8;
 }
 .btn-primary:not(:disabled):not(.disabled):active:focus,
 .btn-primary:not(:disabled):not(.disabled).active:focus,
@@ -4307,7 +4307,7 @@ fieldset:disabled a.btn
 {
     text-decoration: none; 
 
-    color: #233dd2;
+    color: #86dee8;
 }
 .btn-link:focus,
 .btn-link.focus
@@ -6986,7 +6986,7 @@ a.badge:focus
 }
 .alert-primary .alert-link
 {
-    color: #324cdd;
+    color: #86dee8;
 }
 
 .alert-secondary
@@ -8776,7 +8776,7 @@ a.bg-primary:focus,
 button.bg-primary:hover,
 button.bg-primary:focus
 {
-    background-color: #324cdd !important;
+    background-color: #86dee8 !important;
 }
 
 .bg-secondary
@@ -17754,7 +17754,7 @@ button.bg-darker:focus
 a.text-primary:hover,
 a.text-primary:focus
 {
-    color: #233dd2 !important;
+    color: #86dee8 !important;
 }
 
 .text-secondary
@@ -20562,7 +20562,7 @@ textarea[resize='horizontal']
 .form-primary .form-control
 {
     color: #fff;
-    border-color: #324cdd; 
+    border-color: #86dee8;
     background-color: rgba(50, 76, 221, .5);
 }
 .form-primary .form-control:focus
@@ -20582,7 +20582,7 @@ textarea[resize='horizontal']
 .form-primary .input-group-text
 {
     color: #fff;
-    border-color: #324cdd; 
+    border-color: #86dee8;
     background-color: rgba(50, 76, 221, .5);
 }
 
@@ -25022,7 +25022,7 @@ a.bg-blue:focus,
 button.bg-blue:hover,
 button.bg-blue:focus
 {
-    background-color: #324cdd !important;
+    background-color: #86dee8 !important;
 }
 
 .bg-indigo
@@ -26608,7 +26608,7 @@ button.section-darker:focus
 a.text-blue:hover,
 a.text-blue:focus
 {
-    color: #233dd2 !important;
+    color: #86dee8 !important;
 }
 
 .text-indigo
@@ -26947,7 +26947,7 @@ a.text-lighter:focus
 .datepicker table tr td.range.day.disabled:hover
 {
     color: #8a98eb; 
-    background: #324cdd;
+    background: #86dee8;
 }
 .datepicker table tr td.range.highlighted.focused
 {
@@ -28665,7 +28665,7 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
 {
     color: #fff;
     border-color: #1d1d1b;
-    background-color: #324cdd;
+    background-color: #86dee8;
 }
 .ql-tooltip .ql-action::before:not(:disabled):not(.disabled):active:focus,
 .ql-tooltip .ql-action::before:not(:disabled):not(.disabled).active:focus,

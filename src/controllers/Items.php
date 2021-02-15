@@ -17,11 +17,11 @@ class Items
         $img->width(300);
         $img->height(200);
 
-        $path = 'public/assets/img/uploads/items/' . $form["title"] . '_' . date("d-m-y") . '.jpg';
+        $path = 'public/assets/img/uploads/items/' . str_replace(" ", "_", $form["title"]) . '_' . date("d-m-y") . '.jpg';
         // save image
         $img->save($path);
 
-        $path = '/img/uploads/items/' . $form["title"] . '_' . date("d-m-y") . '.jpg';
+        $path = '/img/uploads/items/' . str_replace(" ", "_", $form["title"]) . '_' . date("d-m-y") . '.jpg';
         $items_modal = new \App\Models\Items();
 
         $items_modal->SCHEMA->setTitle($form["title"]);
