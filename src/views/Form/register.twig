@@ -1,0 +1,106 @@
+<form role="form" method="post" action="/register">
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group mb-3">
+                <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-single-02"></i></span>
+                    </div>
+                    <input class="form-control" placeholder="Last Name" type="text"
+                           name="last_name">
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group mb-3">
+                <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-single-02"></i></span>
+                    </div>
+                    <input class="form-control" placeholder="First Name" type="text"
+                           name="first_name">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group mb-3">
+        <div class="input-group input-group-alternative">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+            </div>
+            <input class="form-control form-control-alternative" placeholder="Email"
+                   type="email" name="email">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                    </div>
+                    <input class="form-control"
+                           placeholder="Password" minlength="6" type="password" name="password">
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                    </div>
+                    <input class="form-control"
+                           placeholder="Password confirmation" minlength="6" type="password"
+                           name="password_confirmation">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group input-group-alternative">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="far fa-map"></i></span>
+            </div>
+            <input class="form-control"
+                   placeholder="Country" type="text" name="country">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group input-group-alternative">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-location-arrow"></i></span>
+            </div>
+            <input class="form-control"
+                   placeholder="address" type="text" name="address">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-map-pin"></i></span>
+                    </div>
+                    <input class="form-control"
+                           placeholder="city" type="text" name="city">
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-map-marked-alt"></i></span>
+                    </div>
+                    <input class="form-control"
+                           placeholder="Zip Code" type="number"
+                           name="zip_code">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <input type="submit" class="btn btn-primary btn-block my-4" value="Register">
+    </div>
+</form>

@@ -1,0 +1,14 @@
+{% extends "Layout/layout.twig" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 center">
+            {% include('Macro/notification.twig') %}
+            <div class="card">
+                <div class="card-body">
+                    {% include "Form/register.twig" %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

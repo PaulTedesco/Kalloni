@@ -1,0 +1,54 @@
+{% extends "Layout/layout.twig" %}
+
+{% block content %}
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card border-secondary">
+                <div class="card-header text-center">
+                    <img src="https://www.gravatar.com/avatar/{{ hashMD5 }}"
+                         class="border border-info rounded-circle">
+                    <h2 class="text-center">{{ profile.getFirstName() }} {{ profile.getLastName() }}</h2>
+                </div>
+                <div class="card-body text-secondary">
+                    <form action="/users/{{ profile.getId() }}" method="post">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" class="form-control" placeholder="First Name"
+                                   name="firstName" {% if user.getId() != profile.getId() %} disabled{% endif %}
+                                   value="{{ profile.getFirstName() }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" class="form-control" placeholder="Last Name"
+                                   name="lastName" {% if user.getId() != profile.getId() %} disabled{% endif %}
+                                   value="{{ profile.getLastName() }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="emailRegister">Email</label>
+                            <input type="email" id="emailRegister" class="form-control" placeholder="Email"
+                                   name="emailRegister" {% if user.getId() != profile.getId() %} disabled{% endif %}
+                                   value="{{ profile.getEmail() }}">
+                        </div>
+                        {% if user.getId() == profile.getId() %}
+                            <div class="form-group">
+                                <label for="passwordRegister">Password</label>
+                                <input type="password" id="passwordRegister" class="form-control"
+                                       placeholder="Password" name="passwordRegister">
+                            </div>
+                            <div class="form-group">
+                                <label for="passwordConfRegister">Repeat Password</label>
+                                <input type="password" id="passwordConfRegister" class="form-control"
+                                       placeholder="Password" name="passwordConfRegister">
+                            </div>
+                            <div class="text-center">
+                                <input type="submit" value="Mise à Jour" name="updateRegister"
+                                       class="btn btn-secondary">
+                            </div>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
