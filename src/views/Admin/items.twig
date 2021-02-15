@@ -2,56 +2,71 @@
 {% block content %}
     <div class="row">
         <div class="col-6">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#modal-create">Create Categories</button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#modal-create">Create Items</button>
         </div>
     </div>
-    <div class="table-responsive">
-        <div>
-            <table class="table align-items-center">
-                <thead class="thead-light">
+    <div class="table-responsive" data-toggle="list" data-list-values='["cat","price", "updated"]'>
+        <table class="table align-items-center">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Pictures</th>
+                <th scope="col" class="sort" data-sort="cat">Category</th>
+                <th scope="col" class="sort" data-sort="price">Price</th>
+                <th scope="col" class="sort" data-sort="updated">Last Updated</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody class="list">
+            {% for item in items|sort((a,b) => a.getUpdatedAt <=> b.getUpdatedAt) %}
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Last activity</th>
-                    <th scope="col"></th>
-                </tr>
-                </thead>
-                <tbody class="list">
-                {% for category in categories %}
-                    <tr>
-                        <td class="email">
-                            {{ category.getId }}
-                        </td>
-                        <td>
-                            <span>{{ category.getTitle }}</span>
-                        </td>
-                        <td>
-                            <span>{{ category.getUpdatedAt }}</span>
-                        </td>
-                        <td class="text-right">
-                            <div class="dropdown">
-                                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
-                                   data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                    <button class="dropdown-item" data-id="{{ category.getId }}"
-                                            data-title="{{ category.getTitle }}" data-target="#modal-update"
-                                            data-toggle="modal">
-                                        Update role
-                                    </button>
-                                    <button class="dropdown-item" data-target="#modal-delete" data-toggle="modal"
-                                            data-id="{{ category.getId }}">Delete
-                                    </button>
-                                </div>
+                    <td>
+                        <span>{{ item.getId }}</span>
+                    </td>
+                    <td>
+                        <span>{{ item.getTitle }}</span>
+                    </td>
+                    <td>
+                        <span>{{ item.getDescription }}</span>
+                    </td>
+                    <td>
+                        <span class="avatar mr-3"><img src="{{ assets }}{{ item.getPicture }}"
+                                                       alt=""></span>
+                    </td>
+                    <td>
+                        <span class="cat">{% for cat in categories %}{% if item.getCategory == cat.getId %} {{ cat.getTitle }} {% endif %}{% endfor %}</span>
+                    </td>
+                    <td>
+                        <span class="price">{{ item.getPrice }}</span>
+                    </td>
+                    <td>
+                        <span class="update">{{ item.getUpdatedAt }}</span>
+                    </td>
+                    <td class="text-right">
+                        <div class="dropdown">
+                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
+                               data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                <button class="dropdown-item" data-id="{{ category.getId }}"
+                                        data-title="{{ category.getTitle }}" data-target="#modal-update"
+                                        data-toggle="modal">
+                                    Update role
+                                </button>
+                                <button class="dropdown-item" data-target="#modal-delete" data-toggle="modal"
+                                        data-id="{{ category.getId }}">Delete
+                                </button>
                             </div>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}
 {% block modal %}
@@ -64,20 +79,7 @@
                         <div class="card bg-lighter border-0 mb-0">
                             <div class="card-body px-lg-5 py-lg-5">
                                 <h2>Update Categories</h2>
-                                <form class="link-update" method="post" action="">
-                                    <div class="form-group">
-                                        <div class="input-group input-group-alternative">
-                                            <input type="text" class="title form-control" value="" placeholder="Title"
-                                                   name="title">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="input-group input-group-alternative">
-                                            <input type="submit" class="btn btn-block btn-light"
-                                                   value="Categories update">
-                                        </div>
-                                    </div>
-                                </form>
+
                             </div>
                         </div>
                     </div>
@@ -101,7 +103,7 @@
                         <div class="py-3 text-center">
                             <i class="ni ni-bell-55 ni-3x"></i>
                         </div>
-
+                        {% include "Form/items.twig" %}
                     </div>
                     <div class="modal-footer">
                         <a href=""
@@ -129,20 +131,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="py-3 text-center">
-                            <form class="link-update" method="post" action="/admin/items_cat/create">
-                                <div class="form-group">
-                                    <div class="input-group input-group-alternative">
-                                        <input type="text" class="form-control" value="" placeholder="Title"
-                                               name="title">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group input-group-alternative">
-                                        <input type="submit" class="btn btn-block btn-light"
-                                               value="create">
-                                    </div>
-                                </div>
-                            </form>
+                            {% include "Form/items.twig" %}
                         </div>
 
                     </div>

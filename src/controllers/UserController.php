@@ -6,6 +6,7 @@ namespace App\Controllers;
 
 use App\Utils\Common;
 use App\Utils\FunctionClass;
+use DateTime;
 use Exception;
 use App\Models;
 
@@ -77,6 +78,10 @@ class UserController extends common
         $model->SCHEMA->setRoles("member");
         $model->SCHEMA->setPassword(password_hash($input['password'], PASSWORD_BCRYPT));
         $model->SCHEMA->setEmail($input['email']);
+
+        $date = date('d-m-Y');
+        $model->SCHEMA->setCreatedAt($date);
+        $model->SCHEMA->setUpdatedAt($date);
         $err = $model->create($model->SCHEMA);
         if (!$err) {
             return self::showRegister(info: "Success: User Created you can login now");

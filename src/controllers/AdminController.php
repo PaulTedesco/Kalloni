@@ -44,11 +44,22 @@ class AdminController extends Common
         parent::getView('Admin/items_categories.twig', $this->params);
     }
 
+    public function showItems()
+    {
+        $items = new \App\Models\Items();
+        $cat = new \App\Models\ItemsCategories();
+        $categories = $cat->getAll($cat->SCHEMA);
+        $param = array("items" => ($items->getAll($items->SCHEMA)) ? $items->getAll($items->SCHEMA) : [], "categories" => $categories);
+        $this->params = array_merge($this->params, $param);
+        parent::getView('Admin/items.twig', $this->params);
+    }
+
     public function updateUser(string $uuid, string $role)
     {
         $user = new Users();
         $user->SCHEMA->setId($uuid);
         $user->SCHEMA->setRoles($role);
+        $user->SCHEMA->setUpdatedAt(date('d-m-Y'));
         $user->update($user->SCHEMA);
         FunctionClass::goBack();
     }

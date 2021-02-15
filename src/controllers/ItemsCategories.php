@@ -13,6 +13,8 @@ class ItemsCategories
         $items_categories_modal = new \App\Models\ItemsCategories();
 
         $items_categories_modal->SCHEMA->setTitle($name);
+        $items_categories_modal->SCHEMA->setCreatedAt(date("d-m-Y"));
+        $items_categories_modal->SCHEMA->setUpdatedAt(date("d-m-Y"));
         $items_categories_modal->create($items_categories_modal->SCHEMA);
 
         FunctionClass::goBack();
@@ -36,6 +38,7 @@ class ItemsCategories
 
         $items_categories_modal->SCHEMA->setId($uuid);
         $items_categories_modal->SCHEMA->setTitle($title);
+        $items_categories_modal->SCHEMA->setUpdatedAt(date('d-m-Y'));
         $items_categories_modal->update($items_categories_modal->SCHEMA);
 
         FunctionClass::goBack();

@@ -14,6 +14,7 @@
                     <th scope="col" class="sort" data-sort="email">Email</th>
                     <th scope="col" class="sort" data-sort="address">Adress</th>
                     <th scope="col" class="sort" data-sort="role">Roles</th>
+                    <th scope="col" class="sort" data-sort="last_update">Last activity</th>
                     <th scope="col"></th>
                 </tr>
                 </thead>
@@ -39,6 +40,9 @@
                         </td>
                         <td>
                             <span class="role">{{ user.getRoles|upper }}</span>
+                        </td>
+                        <td>
+                            <span class="last_update">{{ user.getUpdatedAt }}</span>
                         </td>
                         <td class="text-right">
                             <div class="dropdown">

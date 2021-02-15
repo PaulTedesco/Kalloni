@@ -1,0 +1,55 @@
+<form role="form" method="post" action="/admin/items/create" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group mb-3">
+                <div class="input-group input-group-alternative">
+                    <input class="title form-control" placeholder="Title" type="text"
+                           name="title">
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group mb-3">
+                <div class="input-group input-group-alternative">
+                    <input class="price form-control" placeholder="Price" type="number"
+                           name="price">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="input-group input-group-alternative">
+                        <textarea placeholder="Description" name="description"
+                                  class="description form-control"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group mb-3">
+                <div class="input-group input-group-alternative">
+                    <select class="form-control role" data-toggle="select" title="Simple select"
+                            data-live-search="true" data-live-search-placeholder="Search ..."
+                            name="category">
+                        {% for cat in categories %}
+                            <option value="{{ cat.getId }}">{{ cat.getTitle }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="input-group input-group-alternative">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="picture" id="picture" lang="fr">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <input type="submit" class="btn btn-primary btn-block my-4" value="New items">
+    </div>
+</form>

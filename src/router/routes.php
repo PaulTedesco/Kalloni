@@ -7,6 +7,7 @@ namespace App\Router;
 use AltoRouter;
 use App\Controllers\AdminController;
 use App\Controllers\HomeController;
+use App\Controllers\Items;
 use App\Controllers\ItemsCategories;
 use App\Controllers\UserController;
 use App\Utils\FunctionClass;
@@ -31,6 +32,7 @@ class Routes
         $UserController = new UserController();
         $AdminController = new AdminController();
         $ItemsCatController = new ItemsCategories();
+        $ItemsController = new Items();
 
         $this->router->map('GET', '/home', function () use ($HomeController) { return $HomeController->show(); });
         $this->router->map('GET', '/profile/[*:uuid]', function ($uuid) use ($UserController) { return $UserController->show($uuid); });
@@ -62,6 +64,12 @@ class Routes
             $this->router->map('POST', '/admin/items_cat/create', function () use ($ItemsCatController) { return $ItemsCatController->createCategories($_POST['title']); });
             $this->router->map('GET', '/admin/items_cat/delete/[*:uuid]', function (string $uuid) use ($ItemsCatController) { return $ItemsCatController->deleteCategory($uuid); });
             $this->router->map('POST', '/admin/items_cat/update/[*:uuid]', function (string $uuid) use ($ItemsCatController) { return $ItemsCatController->updateCategory($uuid, $_POST['title']); });
+                    /** End Categories */
+                    /** Categories Section */
+            $this->router->map('GET', '/admin/items', function () use ($AdminController) { return $AdminController->showItems(); });
+            $this->router->map('POST', '/admin/items/create', function () use ($ItemsController) { return $ItemsController->createItems($_POST); });
+            $this->router->map('GET', '/admin/items/delete/[*:uuid]', function (string $uuid) use ($ItemsController) { return $ItemsController->deleteItem($uuid); });
+            $this->router->map('POST', '/admin/items/update/[*:uuid]', function (string $uuid) use ($ItemsController) { return $ItemsController->updateItem($uuid, $_POST); });
                     /** End Categories */
             $this->router->map('GET', '/admin/items', function () use ($UserController) { return $UserController->showRegister(); });
             $this->router->map('GET', '/admin/facture', function () use ($UserController) { return $UserController->showRegister(); });
