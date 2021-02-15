@@ -1,0 +1,18 @@
+{
+  "name": "pault/kaloni",
+  "authors": [
+    {
+      "name": "steodec",
+      "email": "paul.tedesco@ynov.com"
+    }
+  ],
+  "require": {
+    "altorouter/altorouter": "1.1.0",
+    "twig/twig": "^3.0"
+  },
+  "autoload": {
+    "classmap": [
+      "./App/"
+    ]
+  }
+}
