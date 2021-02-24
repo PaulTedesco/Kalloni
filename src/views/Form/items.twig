@@ -16,35 +16,27 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
         <div class="col-12">
-            <div class="input-group input-group-alternative">
-                        <textarea placeholder="Description" name="description"
-                                  class="description form-control"></textarea>
-            </div>
+            <textarea name="description" class="editor"></textarea>
         </div>
-    </div>
-    <div class="row">
+        <br>
+        <br>
+        <br>
         <div class="col-12">
             <div class="form-group mb-3">
-                <div class="input-group input-group-alternative">
-                    <select class="form-control role" data-toggle="select" title="Simple select"
-                            data-live-search="true" data-live-search-placeholder="Search ..."
-                            name="category">
-                        {% for cat in categories %}
-                            <option value="{{ cat.getId }}">{{ cat.getTitle }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
+                <select class="form-control role" data-toggle="select" title="Simple select"
+                        data-live-search="true" data-live-search-placeholder="Search ..."
+                        name="category">
+                    {% for cat in categories %}
+                        <option value="{{ cat.getId }}">{{ cat.getTitle }}</option>
+                    {% endfor %}
+                </select>
             </div>
         </div>
-    </div>
-    <div class="row">
         <div class="col-12">
             <div class="input-group input-group-alternative">
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" name="picture" id="picture" lang="fr">
+                    <input type="file" class="custom-file-input" name="picture[]" lang="fr" multiple>
                 </div>
             </div>
         </div>
@@ -52,4 +44,5 @@
     <div class="text-center">
         <input type="submit" class="btn btn-primary btn-block my-4" value="New items">
     </div>
+
 </form>

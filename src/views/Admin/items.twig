@@ -32,11 +32,17 @@
                         <span>{{ item.getTitle }}</span>
                     </td>
                     <td>
-                        <span>{{ item.getDescription }}</span>
+                        <span>{{ item.getDescription|u.truncate(80,'...')|raw }}</span>
                     </td>
                     <td>
-                        <span class="avatar mr-3"><img src="{{ assets }}{{ item.getPicture }}"
-                                                       alt=""></span>
+                        <div class="avatar-group">
+                            {% set img = item.getPicture|split(",") %}
+                            {% for image in img %}
+                                <a href="#" class="avatar avatar-sm">
+                                    <img src="{{ assets }}{{ image }}" alt="">
+                                </a>
+                            {% endfor %}
+                        </div>
                     </td>
                     <td>
                         <span class="cat">{% for cat in categories %}{% if item.getCategory == cat.getId %} {{ cat.getTitle }} {% endif %}{% endfor %}</span>
@@ -76,7 +82,7 @@
     <div class="col-md-4">
         <div class="modal fade" id="modal-update" tabindex="-1" role="dialog" aria-labelledby="modal-form"
              aria-hidden="true">
-            <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
+            <div class="modal-dialog modal- modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-body p-0">
                         <div class="card bg-lighter border-0 mb-0">
@@ -168,5 +174,54 @@
                 modal.find('.link-delete').attr("href", "/admin/items/delete/" + id)
             })
         });
+    </script>
+
+    <script src="{{ assets }}/js/components/ckeditor/build/ckeditor.js"></script>
+    <script>
+        $("textarea").each(function () {
+            ClassicEditor
+                .create(this, {
+
+                    toolbar: {
+                        items: [
+                            'heading',
+                            '|',
+                            'bold',
+                            'italic',
+                            'link',
+                            'bulletedList',
+                            'numberedList',
+                            '|',
+                            'indent',
+                            'outdent',
+                            '|',
+                            'blockQuote',
+                            'undo',
+                            'redo'
+                        ]
+                    },
+                    language: 'fr',
+                    table: {
+                        contentToolbar: [
+                            'tableColumn',
+                            'tableRow',
+                            'mergeTableCells'
+                        ]
+                    },
+                    licenseKey: '',
+
+                })
+                .then(editor => {
+                    window.editor = editor;
+
+
+                })
+                .catch(error => {
+                    console.error('Oops, something went wrong!');
+                    console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+                    console.warn('Build id: lsmi33k9tbic-3rtq4uq6t5mn');
+                    console.error(error);
+                });
+        })
     </script>
 {% endblock %}

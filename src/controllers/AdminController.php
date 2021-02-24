@@ -31,7 +31,7 @@ class AdminController extends Common
     public function showUser()
     {
         $users = new Users();
-        $param = array("users" => $users->getAll($users->SCHEMA));
+        $param = array("users" => $users->fetchAll($users->SCHEMA));
         $this->params = array_merge($this->params, $param);
         parent::getView('Admin/users.twig', $this->params);
     }
@@ -39,7 +39,7 @@ class AdminController extends Common
     public function showItemsCategories()
     {
         $items_cat = new \App\Models\ItemsCategories();
-        $param = array("categories" => $items_cat->getAll($items_cat->SCHEMA));
+        $param = array("categories" => $items_cat->fetchAll($items_cat->SCHEMA));
         $this->params = array_merge($this->params, $param);
         parent::getView('Admin/items_categories.twig', $this->params);
     }
@@ -48,8 +48,8 @@ class AdminController extends Common
     {
         $items = new \App\Models\Items();
         $cat = new \App\Models\ItemsCategories();
-        $categories = $cat->getAll($cat->SCHEMA);
-        $param = array("items" => ($items->getAll($items->SCHEMA)) ? $items->getAll($items->SCHEMA) : [], "categories" => $categories);
+        $categories = $cat->fetchAll($cat->SCHEMA);
+        $param = array("items" => ($items->fetchAll($items->SCHEMA)) ? $items->fetchAll($items->SCHEMA) : [], "categories" => $categories);
         $this->params = array_merge($this->params, $param);
         parent::getView('Admin/items.twig', $this->params);
     }

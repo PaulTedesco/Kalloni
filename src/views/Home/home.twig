@@ -4,16 +4,18 @@
         {% for item in items %}
             <div class="card col-2">
                 <!-- Card image -->
-                <img class="card-img-top" src="{{ assets }}{{ item.getPicture }}" alt="{{ item.getTitle }}">
+                <img class="card-img-top" src="{{ assets }}{{ item.getPicture|split(",")|first }}"
+                     alt="{{ item.getTitle }}">
                 <!-- List group -->
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">{{ item.getTitle }}</li>
-                    <li class="list-group-item">{{ item.getDescription }}</li>
+                    <li class="list-group-item">{{ item.getDescription|u.truncate(80,'...')|raw }}</li>
                     <li class="list-group-item">{{ item.price }} €</li>
                 </ul>
                 <!-- Card body -->
                 <div class="card-body">
-                    <a href="/items/{{ item.getTitle()|replace({" ":"_"}) }}" class="btn btn-primary">See</a>
+                    <a href="/{{ item.getCategoryName |replace({" ":"_"}) }}/{{ item.getTitle()|replace({" ":"_"}) }}"
+                       class="btn btn-primary">See</a>
                 </div>
             </div>
         {% endfor %}

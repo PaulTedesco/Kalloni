@@ -22,7 +22,7 @@ class HomeController extends Common
     public function show()
     {
         $items = new \App\Models\Items();
-        $items = $items->getAll($items->SCHEMA);
+        $items = $items->fetchAll($items->SCHEMA);
         parent::getView("Home/home.twig", array("items" => $items));
         return;
     }

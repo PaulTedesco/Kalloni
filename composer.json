@@ -10,7 +10,8 @@
     "altorouter/altorouter": "1.1.0",
     "twig/twig": "^3.0",
     "ext-pdo": "*",
-    "spatie/image": "^1.10"
+    "spatie/image": "^1.10",
+    "twig/string-extra": "^3.3"
   },
   "autoload": {
     "classmap": [

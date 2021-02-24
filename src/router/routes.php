@@ -26,7 +26,7 @@ class Routes
     {
 
         $this->router->map('GET', '/', function () {
-            echo "<script>window.location.href = '/home';</script>";
+            echo "<script>window.location.href = '/accueil';</script>";
         });
 
         $HomeController = new HomeController();
@@ -36,9 +36,36 @@ class Routes
         $ItemsAdminController = new Items();
         $shopController = new Shop();
 
-        $this->router->map('GET', '/home', function () use ($HomeController) { return $HomeController->show(); });
+        if (FunctionClass::isAdmin()):
+            /** Dashboard section */
+            $this->router->map('GET', '/admin', function () use ($AdminController) { return $AdminController->showDashboard(); });
+            $this->router->map('GET', '/admin/users', function () use ($AdminController) { return $AdminController->showUser(); });
+            $this->router->map('GET', '/admin/users/delete/[*:uuid]', function ($uuid) use ($AdminController) { return $AdminController->deleteUser($uuid); });
+            $this->router->map('POST', '/admin/users/update/[*:uuid]', function ($uuid) use ($AdminController) { return $AdminController->updateUser($uuid, $_POST['role']); });
+            $this->router->map('POST', '/register', function () use ($UserController) { return $UserController->register($_POST); });
+            $this->router->map('GET', '/register', function () use ($UserController) { return $UserController->showRegister(); });
+            /** Shop section */
+            /** Categories Section */
+            $this->router->map('GET', '/admin/items_cat', function () use ($AdminController) { return $AdminController->showItemsCategories(); });
+            $this->router->map('POST', '/admin/items_cat/create', function () use ($ItemsCatController) { return $ItemsCatController->createCategories($_POST['title']); });
+            $this->router->map('GET', '/admin/items_cat/delete/[*:uuid]', function (string $uuid) use ($ItemsCatController) { return $ItemsCatController->deleteCategory($uuid); });
+            $this->router->map('POST', '/admin/items_cat/update/[*:uuid]', function (string $uuid) use ($ItemsCatController) { return $ItemsCatController->updateCategory($uuid, $_POST['title']); });
+            /** End Categories */
+            /** Categories Section */
+            $this->router->map('GET', '/admin/items', function () use ($AdminController) { return $AdminController->showItems(); });
+            $this->router->map('POST', '/admin/items/create', function () use ($ItemsAdminController) { return $ItemsAdminController->createItems($_POST); });
+            $this->router->map('GET', '/admin/items/delete/[*:uuid]', function (string $uuid) use ($ItemsAdminController) { return $ItemsAdminController->deleteItem($uuid); });
+            $this->router->map('POST', '/admin/items/update/[*:uuid]', function (string $uuid) use ($ItemsAdminController) { return $ItemsAdminController->updateItem($uuid, $_POST); });
+            /** End Categories */
+            $this->router->map('GET', '/admin/items', function () use ($UserController) { return $UserController->showRegister(); });
+            $this->router->map('GET', '/admin/facture', function () use ($UserController) { return $UserController->showRegister(); });
+            /** End Shop */
+            /** End Dashboard */
+        endif;
+
+        $this->router->map('GET', '/accueil', function () use ($HomeController) { return $HomeController->show(); });
         $this->router->map('GET', '/profile/[*:uuid]', function ($uuid) use ($UserController) { return $UserController->show($uuid); });
-        $this->router->map('GET', '/items/[*:uuid]', function($uuid) use ($shopController) {return $shopController->show($uuid);});
+        $this->router->map('GET', '/[*:category]/[*:uuid]', function($category, $uuid) use ($shopController) {return $shopController->show($category, $uuid);});
 
         if (!FunctionClass::isConnected()):
             $this->router->map('POST', '/register', function () use ($UserController) { return $UserController->register($_POST); });
@@ -52,32 +79,6 @@ class Routes
                 FunctionClass::redirect("/login");
 
             });
-        endif;
-        if (FunctionClass::isAdmin()):
-            /** Dashboard section */
-            $this->router->map('GET', '/admin', function () use ($AdminController) { return $AdminController->showDashboard(); });
-            $this->router->map('GET', '/admin/users', function () use ($AdminController) { return $AdminController->showUser(); });
-            $this->router->map('GET', '/admin/users/delete/[*:uuid]', function ($uuid) use ($AdminController) { return $AdminController->deleteUser($uuid); });
-            $this->router->map('POST', '/admin/users/update/[*:uuid]', function ($uuid) use ($AdminController) { return $AdminController->updateUser($uuid, $_POST['role']); });
-            $this->router->map('POST', '/register', function () use ($UserController) { return $UserController->register($_POST); });
-            $this->router->map('GET', '/register', function () use ($UserController) { return $UserController->showRegister(); });
-                /** Shop section */
-                    /** Categories Section */
-            $this->router->map('GET', '/admin/items_cat', function () use ($AdminController) { return $AdminController->showItemsCategories(); });
-            $this->router->map('POST', '/admin/items_cat/create', function () use ($ItemsCatController) { return $ItemsCatController->createCategories($_POST['title']); });
-            $this->router->map('GET', '/admin/items_cat/delete/[*:uuid]', function (string $uuid) use ($ItemsCatController) { return $ItemsCatController->deleteCategory($uuid); });
-            $this->router->map('POST', '/admin/items_cat/update/[*:uuid]', function (string $uuid) use ($ItemsCatController) { return $ItemsCatController->updateCategory($uuid, $_POST['title']); });
-                    /** End Categories */
-                    /** Categories Section */
-            $this->router->map('GET', '/admin/items', function () use ($AdminController) { return $AdminController->showItems(); });
-            $this->router->map('POST', '/admin/items/create', function () use ($ItemsAdminController) { return $ItemsAdminController->createItems($_POST); });
-            $this->router->map('GET', '/admin/items/delete/[*:uuid]', function (string $uuid) use ($ItemsAdminController) { return $ItemsAdminController->deleteItem($uuid); });
-            $this->router->map('POST', '/admin/items/update/[*:uuid]', function (string $uuid) use ($ItemsAdminController) { return $ItemsAdminController->updateItem($uuid, $_POST); });
-                    /** End Categories */
-            $this->router->map('GET', '/admin/items', function () use ($UserController) { return $UserController->showRegister(); });
-            $this->router->map('GET', '/admin/facture', function () use ($UserController) { return $UserController->showRegister(); });
-                /** End Shop */
-            /** End Dashboard */
         endif;
 
     }

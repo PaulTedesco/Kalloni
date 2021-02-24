@@ -38,7 +38,7 @@ abstract class DataBase
      * @return array|null
      * @author pault
      */
-    function getAll(object $OBJECT): ?array
+    function fetchAll(object $OBJECT): ?array
     {
         $get = $this->DB->prepare("SELECT * FROM `" . $OBJECT::TABLENAME . "`;");
         $get->execute();
@@ -51,13 +51,13 @@ abstract class DataBase
      * @return object|null
      * @author pault
      */
-    function getOne(object $OBJECT, string $field, string $value): ?object
+    function fetchOne(object $OBJECT, string $field, string $value): ?object
     {
         $query = "SELECT * FROM `" . $OBJECT::TABLENAME . "` WHERE `" . $field . "`= ?";
         $get = $this->DB->prepare($query);
         $get->execute(array($value));
         $result = $get->fetchAll(PDO::FETCH_CLASS, get_class($OBJECT));
-        return ($result[0]) ? $result[0] : NULL;
+        return (is_array($result) && !empty($result)) ? $result[0] : NULL;
     }
 
 

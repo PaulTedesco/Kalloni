@@ -4,17 +4,19 @@
 namespace App\Schema;
 
 
+use App\Models\ItemsCategories;
+
 class Items
 {
     const TABLENAME = "items";
     private string $id;
-    public string $title;
-    public string $description;
-    public string $picture;
-    public string $category;
-    public string $price;
-    public string $created_at;
-    public string $updated_at;
+    public string  $title;
+    public string  $description;
+    public string  $picture;
+    public string  $category;
+    public string  $price;
+    public string  $created_at;
+    public string  $updated_at;
 
     /**
      * @return string
@@ -142,6 +144,14 @@ class Items
     public function setUpdatedAt(string $updated_at): void
     {
         $this->updated_at = $updated_at;
+    }
+
+
+    public function getCategoryName()
+    {
+        $cat = new ItemsCategories();
+        $catName = $cat->fetchOne($cat->SCHEMA, 'id', $this->category);
+        return $catName->getTitle();
     }
 
 

@@ -10,6 +10,7 @@ use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 use Twig\Extension\DebugExtension;
+use Twig\Extra\String\StringExtension;
 use Twig\Loader\FilesystemLoader;
 use Twig\TwigFilter;
 
@@ -95,10 +96,18 @@ abstract class Common
         if (FunctionClass::isConnected()) $params["user"] = $_SESSION["user"];
         if (FunctionClass::isConnected()) $params["hashMD5"] = md5(strtolower(trim($_SESSION['user']->getEmail())));
         $params['isAdmin'] = FunctionClass::isAdmin();
+        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+            $url = "https://";
+        else
+            $url = "http://";
+        $url .= $_SERVER['HTTP_HOST'];
+        $url .= $_SERVER['REQUEST_URI'];
+        $params["path"] = explode("/", parse_url($url, PHP_URL_PATH));
         $twig->addExtension(new DebugExtension());
         $filter = new \Twig\TwigFilter('md5', function (string $string) {
             return md5($string);
         });
+        $twig->addExtension(new StringExtension());
         $twig->addFilter($filter);
         $page = $twig->load($templatePath);
         return $page->display($params);

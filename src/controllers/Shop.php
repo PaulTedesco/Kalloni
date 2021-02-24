@@ -20,10 +20,10 @@ class Shop extends Common
     /**
      * @param $uuid
      */
-    public function show($uuid)
+    public function show($category, $uuid)
     {
         $items = new \App\Models\Items();
-        $item = $items->getOne($items->SCHEMA, 'title', $uuid);
+        $item = $items->fetchOne($items->SCHEMA, 'title', str_replace("_", " ", $uuid));
         parent::getView('Items/index.twig', array("item" => $item));
         return;
     }

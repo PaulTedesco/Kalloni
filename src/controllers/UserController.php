@@ -40,7 +40,7 @@ class UserController extends common
     public function show(string $uuid, string|null $error = null, string|null $info = null)
     {
         $user = new Models\Users();
-        $profil = $user->getOne($user->SCHEMA, "id", $uuid);
+        $profil = $user->fetchOne($user->SCHEMA, "id", $uuid);
         return parent::getView("Users/profile.twig",
             ($error) ? array("error" => $error, "profile" => $profil) :
                 (($info) ? array("info" => $info, "profile" => $profil) : ["profile" => $profil]));
